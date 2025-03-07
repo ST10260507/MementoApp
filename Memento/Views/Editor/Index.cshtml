@@ -1,0 +1,38 @@
+@{
+    ViewBag.Title = "Text Editor";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-primary mb-4">Text Editor</h2>
+
+        <form method="post" asp-action="Save">
+            <div class="form-group">
+                <label for="editor" class="font-weight-bold">Enter Your Text:</label>
+                <textarea id="editor" name="content" class="form-control" rows="5">@ViewBag.content</textarea>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <button type="submit" class="btn btn-success">💾 Save</button>
+                <button type="submit" class="btn btn-warning" formmethod="post" asp-action="Undo">↩️ Undo</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="card mt-4 shadow-lg p-4">
+        <h3 class="text-center text-info">Version History</h3>
+        @if (ViewBag.History != null && ViewBag.History.Count > 0)
+        {
+            <ul class="list-group mt-3">
+                @foreach (var version in ViewBag.History)
+                {
+                    <li class="list-group-item list-group-item-light">@version</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="text-muted text-center mt-2">No history available.</p>
+        }
+    </div>
+</div>
+
